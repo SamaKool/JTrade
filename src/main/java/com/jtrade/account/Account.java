@@ -28,7 +28,7 @@ public class Account {
         // 0 if it is zero, and 1 if it is positive.
         // Also checks for null to avoid a NullPointerException on .signum()
         if (value == null) {
-            throw new IllegalArgumentException(fieldName + " cannot be null.");
+            throw new NullPointerException(fieldName + " cannot be null.");
         }
         if (value.signum() == -1) {
             throw new IllegalArgumentException(fieldName + " cannot be negative: " + value);
