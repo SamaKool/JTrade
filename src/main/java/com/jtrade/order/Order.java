@@ -1,4 +1,5 @@
 package com.jtrade.order;
+import java.math.BigDecimal;
 
 public class Order {
     private final String orderId;
@@ -7,10 +8,10 @@ public class Order {
     private final OrderSide side;
     private final OrderType type;
     private final int quantity;
-    private final float price; // We have to replace it with BigDecimal later.
+    private BigDecimal price = BigDecimal.ZERO; // We have to replace it with BigDecimal later.
     private OrderStatus status = OrderStatus.NEW;
     
-    public Order(String orderId, String accountId, String symbol, OrderSide side, OrderType type, int quantity, float price) {
+    public Order(String orderId, String accountId, String symbol, OrderSide side, OrderType type, int quantity, BigDecimal price) {
         this.orderId = orderId;
         this.accountId = accountId;
         this.symbol = symbol;
@@ -24,13 +25,14 @@ public class Order {
         this.status = newStatus;
     }
 
+    // Getters
     public String getOrderId() { return this.orderId; }
     public String getAccountId() { return this.accountId; }
     public String getSymbol() { return this.symbol; }
     public OrderSide getSide() { return this.side; }
     public OrderType getType() { return this.type; }
     public int getQuantity() { return this.quantity; }
-    public float getPrice() { return this.price; }
+    public BigDecimal getPrice() { return this.price; }
     public OrderStatus getStatus() { return this.status; }
 
     @Override
