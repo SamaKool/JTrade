@@ -1,6 +1,6 @@
 package com.jtrade.order;
 
-enum OrderStatus {
+public enum OrderStatus {
     NEW,
     PENDING_RISK,
     APPROVED,

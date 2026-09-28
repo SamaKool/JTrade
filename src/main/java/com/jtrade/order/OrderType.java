@@ -1,6 +1,6 @@
 package com.jtrade.order;
 
-enum OrderType {
+public enum OrderType {
     MARKET,
     LIMIT
 }

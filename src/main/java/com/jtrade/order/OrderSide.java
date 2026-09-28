@@ -1,6 +1,6 @@
 package com.jtrade.order;
 
-enum OrderSide {
+public enum OrderSide {
     BUY,
     SELL
 }

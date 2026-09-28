@@ -8,7 +8,7 @@ public class Order {
     private final OrderSide side;
     private final OrderType type;
     private final int quantity;
-    private BigDecimal price = BigDecimal.ZERO; // We have to replace it with BigDecimal later.
+    private BigDecimal price = BigDecimal.ZERO; 
     private OrderStatus status = OrderStatus.NEW;
     
     public Order(String orderId, String accountId, String symbol, OrderSide side, OrderType type, int quantity, BigDecimal price) {

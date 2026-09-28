@@ -9,14 +9,14 @@ public class Position {
 
     public Position(String accountId, String symbol, int quantity, BigDecimal averagePrice) {
         validateNonNegative(averagePrice, "averagePrice");
-        if(accountId == null) throw new NullPointerException(accountId + "cannot be null.");
-        else if(accountId.isBlank()) throw new IllegalArgumentException(accountId + "cannot be blank.");
+        if(accountId == null) throw new NullPointerException("accountId " + accountId + " cannot be null.");
+        else if(accountId.isBlank()) throw new IllegalArgumentException("accountId " + accountId + " cannot be blank.");
 
-        if(symbol == null) throw new NullPointerException(symbol + "cannot be null");
-        else if(symbol.isBlank()) throw new IllegalArgumentException(symbol + "cannot be blank");
+        if(symbol == null) throw new NullPointerException("symbol " + symbol + " cannot be null");
+        else if(symbol.isBlank()) throw new IllegalArgumentException("symbol " + symbol + " cannot be blank");
 
-        if(quantity == 0) throw new IllegalArgumentException(quantity + "cannot be 0");
-        else if(quantity < 0) throw new IllegalArgumentException(quantity + "cannot be negative");
+        if(quantity == 0) throw new IllegalArgumentException("quantity " + quantity + " cannot be 0");
+        else if(quantity < 0) throw new IllegalArgumentException("quantity " + quantity + " cannot be negative");
         
         this.accountId = accountId;
         this.symbol = symbol;
