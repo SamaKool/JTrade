@@ -10,9 +10,9 @@ public class MaxOrderSizeRule implements RiskRule{
         order.getPrice().multiply(BigDecimal.valueOf(order.getQuantity()));
 
         if (notionalValue.compareTo(account.getMaxOrderValue()) > 0) {
-            return new RiskResult(false, "Order value exceeds maximum order value.");
+            return new RiskResult(false, "MaxOrderSizeRule: Order value exceeds maximum order value.");
         }
 
-        return new RiskResult(true, "Order value is within maximum order value.");
+        return new RiskResult(true, "MaxOrderSizeRule: Order value is within maximum order value.");
     }
 }
