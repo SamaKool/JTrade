@@ -14,7 +14,7 @@ public class RiskEngine {
         for (RiskRule rule : rules) {
             RiskResult result = rule.evaluate(order, account);
             if (!result.getApproved()) {
-                return new RiskResult(false, result.getResult());
+                return result;
             }
         }
         return new RiskResult(true, "All risk checks passed.");
