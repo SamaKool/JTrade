@@ -9,14 +9,19 @@ public class Account {
     private BigDecimal maxDailyLoss = BigDecimal.ZERO;
 
     public Account(String accountId, BigDecimal availableCash, BigDecimal maxOrderValue, BigDecimal maxPositionValue, BigDecimal maxDailyLoss) {
-        this.accountId = accountId;
-
+        if (accountId == null) {
+            throw new NullPointerException("Account Id: " + accountId + ", cannot be a null value!");
+        }
+        if (accountId.isBlank()) {
+            throw new IllegalArgumentException("Account Id: " + accountId + ", cannot be left blank.");
+        }
+        
         validateNonNegative(availableCash, "availableCash");
         validateNonNegative(maxOrderValue, "maxOrderValue");
         validateNonNegative(maxPositionValue, "maxPositionValue");
         validateNonNegative(maxDailyLoss, "maxDailyLoss");
-
-        // this.availableCash = availableCash;
+        
+        this.accountId = accountId;
         this.availableCash = availableCash;
         this.maxOrderValue = maxOrderValue;
         this.maxPositionValue = maxPositionValue;
