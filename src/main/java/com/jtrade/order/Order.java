@@ -21,7 +21,7 @@ public class Order {
         this.price = price;
     }
 
-    public void changeStatus(OrderStatus newStatus) {
+    void changeStatus(OrderStatus newStatus) {
         this.status = newStatus;
     }
 
