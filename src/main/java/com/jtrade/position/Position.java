@@ -53,8 +53,8 @@ public class Position {
     // The Unrealise P&L of a share
     public BigDecimal unrealisedPnL (BigDecimal currentPrice) {
         validateNonNegative(currentPrice, "currentPrice");
-        BigDecimal unrealisedPnl = (currentPrice.subtract(averagePrice)).multiply(BigDecimal.valueOf(quantity));
-        return unrealisedPnl;
+        BigDecimal unrealisedPnL = (currentPrice.subtract(averagePrice)).multiply(BigDecimal.valueOf(quantity));
+        return unrealisedPnL;
     }
 
     @Override 
