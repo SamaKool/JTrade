@@ -10,9 +10,9 @@ public class BuyingPowerRule implements RiskRule{
         order.getPrice().multiply(BigDecimal.valueOf(order.getQuantity()));
 
         if (!account.hasSufficientCash(notionalValue)) {
-            return new RiskResult(false, "Order value exceeds account balance.");
+            return new RiskResult(false, "BuyingPowerRule: Order value exceeds account balance.");
         }
 
-        return new RiskResult(true, "Order value is within account balance.");
+        return new RiskResult(true, "BuyingPowerRule: Order value is within account balance.");
     }
 }
