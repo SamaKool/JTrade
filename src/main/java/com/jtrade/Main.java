@@ -2,6 +2,8 @@ package com.jtrade;
 import com.jtrade.account.Account;
 import com.jtrade.order.Order;
 import com.jtrade.order.OrderSide;
+import com.jtrade.order.OrderStateMachine;
+import com.jtrade.order.OrderStatus;
 import com.jtrade.order.OrderType;
 import com.jtrade.risk.BuyingPowerRule;
 import com.jtrade.risk.MaxOrderSizeRule;
@@ -32,6 +34,15 @@ public class Main {
             new BigDecimal("2900")
         );
 
+        System.out.println(Order_1.toString());
+
+        OrderStateMachine m1 = new OrderStateMachine();
+        OrderStatus status = OrderStatus.FILLED;
+
+        m1.transition(Order_1, status);
+        System.out.println("Can change status: true");
+        System.out.println("Order_1 Status: " + Order_1.getStatus());
+
         List<RiskRule> riskEngine = new ArrayList<>();
         riskEngine.add(new MaxOrderSizeRule());
         riskEngine.add(new BuyingPowerRule());
@@ -40,7 +51,7 @@ public class Main {
         RiskResult reason = rule.evaluateOrder(Order_1, account);
         System.out.println(reason);
 
-
+        /*
         Order Order_2 = new Order(
             "ORD-002",
             "ACC-001",
@@ -61,6 +72,7 @@ public class Main {
             50,
             new BigDecimal("2900")
         );
+        */
 
         }
     }
