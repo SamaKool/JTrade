@@ -14,6 +14,7 @@ import com.jtrade.risk.RiskResult;
 import com.jtrade.risk.RiskRule;
 import com.jtrade.order.InMemoryOrderRepository;
 import com.jtrade.order.OrderRepository;
+import com.jtrade.order.OrderService;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,6 @@ public class Main {
         accounts.save(account_1);
         if(accounts.exists("ACC-001")) System.out.println("Account " + account_1.getAccountId() + " Exists !!!!!");
         else System.out.println("Account dont exist.....");
-
-        // System.out.println(accounts.findById("ACC-001"));
 
         OrderRepository repository = new InMemoryOrderRepository();
 
@@ -66,40 +65,21 @@ public class Main {
             50,
             new BigDecimal("2900")
         );
-        
-        repository.save(Order_1);
-        repository.save(Order_2);
-        repository.save(Order_3);
 
-        System.out.println(repository.findAll());
+        System.out.println(Order_1.toString());
         
-        // if (repository.exists("ORD-001")) {
-        //     System.out.println("Order_1 Exists !!!!!!!!!!!!!!");
-        // }
-        
-        // repository.delete("ORD-001");
-        // if (repository.exists("ORD-001")) {
-        //     System.out.println("Order_1 Exists.........T-T");
-        // }
-        // else System.out.println("Order Does Not Exist !!!!!!!");
-
-        // System.out.println(Order_1.toString());
-
         OrderStateMachine m1 = new OrderStateMachine();
-        OrderStatus status = OrderStatus.PENDING_RISK;
-
-        m1.transition(Order_1, status);
-        System.out.println("Can change status: true");
-        System.out.println("Order_1 Status: " + Order_1.getStatus());
-
+        
         List<RiskRule> riskEngine = new ArrayList<>();
         riskEngine.add(new MaxOrderSizeRule());
         riskEngine.add(new BuyingPowerRule());
-
+        
         RiskEngine rule = new RiskEngine(riskEngine);
-        RiskResult reason = rule.evaluateOrder(Order_1, account_1);
-        System.out.println(reason);
         
-        
-        }
+        OrderService os1 = new OrderService(repository, accounts, rule, m1);
+        Order result = os1.submitOrder(Order_1);
+        System.out.println(result.getStatus());
+
+        System.out.println(repository.findAll());
     }
+}
