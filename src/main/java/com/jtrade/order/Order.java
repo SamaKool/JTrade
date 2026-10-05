@@ -15,7 +15,7 @@ public class Order {
     
     public Order(String orderId, String accountId, String symbol, OrderSide side, OrderType type, int quantity, BigDecimal price) {
         if (orderId == null) throw new InvalidOrderException("OrderId cannot be null.");
-        else if (orderId.isBlank()) throw new InvalidOrderException("OrderId cannot be blank.");
+        if (orderId.isBlank()) throw new InvalidOrderException("OrderId cannot be blank.");
         if (side == null) throw new InvalidOrderException("OrderSide value cannot be null.");
         if (type == null) throw new InvalidOrderException("OrderType value cannot be null.");
         if (accountId == null) throw new InvalidOrderException("AccountId cannot be null.");
@@ -26,6 +26,7 @@ public class Order {
         if (price.signum() < 0) throw new InvalidOrderException("Price cannot be negative.");
         if (quantity <= 0) throw new InvalidOrderException("Quantity must be greater than zero.");
         if (type == OrderType.LIMIT && price.compareTo(BigDecimal.ZERO) <= 0) throw new InvalidOrderException("LIMIT order price must be strictly greater than zero.");
+        
         this.orderId = orderId;
         this.accountId = accountId;
         this.symbol = symbol;
