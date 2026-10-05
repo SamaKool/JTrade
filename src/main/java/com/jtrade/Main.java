@@ -1,5 +1,7 @@
 package com.jtrade;
 import com.jtrade.account.Account;
+import com.jtrade.account.AccountRepository;
+import com.jtrade.account.InMemoryAccountRepository;
 import com.jtrade.order.Order;
 import com.jtrade.order.OrderSide;
 import com.jtrade.order.OrderStateMachine;
@@ -18,13 +20,20 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Account account = new Account(
+        AccountRepository accounts = new InMemoryAccountRepository();
+        Account account_1 = new Account(
         "ACC-001",
         new BigDecimal("500000"),
         new BigDecimal("1000000"),
         new BigDecimal("580000"),
         new BigDecimal("50000")
         );
+
+        accounts.save(account_1);
+        if(accounts.exists("ACC-001")) System.out.println("Account " + account_1.getAccountId() + " Exists !!!!!");
+        else System.out.println("Account dont exist.....");
+
+        // System.out.println(accounts.findById("ACC-001"));
 
         OrderRepository repository = new InMemoryOrderRepository();
 
@@ -88,7 +97,7 @@ public class Main {
         riskEngine.add(new BuyingPowerRule());
 
         RiskEngine rule = new RiskEngine(riskEngine);
-        RiskResult reason = rule.evaluateOrder(Order_1, account);
+        RiskResult reason = rule.evaluateOrder(Order_1, account_1);
         System.out.println(reason);
         
         
