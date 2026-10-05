@@ -1,5 +1,6 @@
 package com.jtrade.account;
 import java.math.BigDecimal;
+import com.jtrade.exception.InsufficientBuyingPowerException;
 
 public class Account {
     private final String accountId;
@@ -55,7 +56,7 @@ public class Account {
     public void deductCash(BigDecimal amount) {
         validateNonNegative(amount, "amount");
         if((availableCash.subtract(amount)).compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Insufficient balance!");
+            throw new InsufficientBuyingPowerException("Insufficient balance!");
         }
         else availableCash = availableCash.subtract(amount);
     }

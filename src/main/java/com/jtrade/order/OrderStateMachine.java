@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.EnumSet;
 import java.util.EnumMap;
+import com.jtrade.exception.InvalidOrderTransitionException;
 
 public class OrderStateMachine {
     public boolean canTransition(OrderStatus from, OrderStatus to) {
@@ -88,7 +89,7 @@ public class OrderStateMachine {
             order.changeStatus(newStatus);
         }
         else {
-            throw new IllegalStateException("Invalid transition! " + order.getStatus() + " -> " + newStatus);
+            throw new InvalidOrderTransitionException("Invalid transition! " + order.getStatus() + " -> " + newStatus);
        }
     }
 
